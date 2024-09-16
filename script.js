@@ -4,11 +4,17 @@ const percentButton = document.querySelector(".modulo");
 const dotButton = document.querySelector(".dot");
 const display = document.querySelector(".screen");
 const clearButton = document.querySelector(".clear");
+const plusMinusButton = document.querySelector(".pm");
 let firstNumber = "";
 let secondNumber = "";
 let operator = "";
 let isOperatorChosen = false;
 const MAX_DIGITS = 12;
+
+// Function to find an operator button by its text content
+function getOperatorButton(op) {
+  return Array.from(operators).find((button) => button.textContent === op);
+}
 
 function appendNumber(value) {
   if (!isOperatorChosen) {
@@ -30,13 +36,19 @@ function appendNumber(value) {
   }
 }
 
-function chooseOperator(op) {
+function chooseOperator(op, button) {
   if (firstNumber) {
     if (isOperatorChosen) {
-      calculate(); // Calculate the result if an operator is selected after a result
+      calculate();
     }
     operator = op;
     isOperatorChosen = true;
+
+    operators.forEach((btn) => btn.classList.remove("selected"));
+
+    if (button) {
+      button.classList.add("selected");
+    }
   }
 }
 
@@ -73,6 +85,8 @@ function calculate() {
   secondNumber = "";
   isOperatorChosen = false;
   operator = "";
+
+  operators.forEach((btn) => btn.classList.remove("selected"));
 }
 
 function handlePercent() {
@@ -93,6 +107,8 @@ function resetCalculator() {
   secondNumber = "";
   operator = "";
   isOperatorChosen = false;
+
+  operators.forEach((btn) => btn.classList.remove("selected"));
 }
 
 function handleBackspace() {
@@ -105,6 +121,18 @@ function handleBackspace() {
   }
 }
 
+function toggleSign() {
+  if (!isOperatorChosen) {
+    // Toggle sign for firstNumber
+    firstNumber = (parseFloat(firstNumber) * -1).toString();
+    display.textContent = firstNumber;
+  } else if (secondNumber) {
+    // Toggle sign for secondNumber
+    secondNumber = (parseFloat(secondNumber) * -1).toString();
+    display.textContent = secondNumber;
+  }
+}
+
 numbers.forEach((button) => {
   button.addEventListener("click", function () {
     appendNumber(button.textContent);
@@ -113,13 +141,15 @@ numbers.forEach((button) => {
 
 operators.forEach((button) => {
   button.addEventListener("click", function () {
-    chooseOperator(button.textContent);
+    chooseOperator(button.textContent, button);
   });
 });
 
 dotButton.addEventListener("click", function () {
   appendNumber(".");
 });
+
+plusMinusButton.addEventListener("click", toggleSign);
 
 document.querySelector(".equal").addEventListener("click", calculate);
 
@@ -136,13 +166,13 @@ document.addEventListener("keydown", function (event) {
   if (/\d/.test(key)) {
     appendNumber(key);
   } else if (key === "+") {
-    chooseOperator("+");
+    chooseOperator("+", getOperatorButton("+"));
   } else if (key === "-") {
-    chooseOperator("-");
+    chooseOperator("-", getOperatorButton("-"));
   } else if (key === "*") {
-    chooseOperator("×");
+    chooseOperator("×", getOperatorButton("×"));
   } else if (key === "/") {
-    chooseOperator("÷");
+    chooseOperator("÷", getOperatorButton("÷"));
   } else if (key === "Enter" || key === "=") {
     calculate();
   } else if (key === "Escape") {

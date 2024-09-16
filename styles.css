@@ -12,10 +12,14 @@ body {
 }
 
 .calculator-frame {
-  background-color: black;
+  background: linear-gradient(135deg, #1c1c1c, #444);
   height: 600px; /* Adjusted height */
   width: 400px; /* Adjusted width */
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5),
+    inset 0px 4px 10px rgba(0, 0, 0, 0.6);
   border: 2px solid #444;
+  position: relative;
 }
 
 .screen {
@@ -25,7 +29,7 @@ body {
   border: 2px solid #444;
   box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.6);
   color: #f5f5f5;
-  font-size: 3em;
+  font-size: 4em;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -74,13 +78,6 @@ body {
 
 .zero {
   grid-column: span 2;
-}
-
-/* gradient */
-.calculator-frame {
-  background: linear-gradient(135deg, #1c1c1c, #444);
-  border-radius: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* hover effect for all buttons */
@@ -144,15 +141,6 @@ body {
   transform: translateY(2px);
 }
 
-.calculator-frame {
-  background: linear-gradient(135deg, #1c1c1c, #444);
-  border-radius: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5),
-    inset 0px 4px 10px rgba(0, 0, 0, 0.6);
-  border: 2px solid #444;
-  position: relative;
-}
-
 .calculator-frame::before {
   content: "";
   position: absolute;
@@ -164,4 +152,10 @@ body {
   background: rgba(0, 0, 0, 0.4);
   z-index: -1;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5); /* 3d effect */
+}
+
+.operator.selected {
+  background-color: white;
+  color: rgb(223, 151, 75);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }

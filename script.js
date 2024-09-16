@@ -17,11 +17,16 @@ function getOperatorButton(op) {
 }
 
 function appendNumber(value) {
+  // Check if the number of characters on the display exceeds MAX_DIGITS
+  if (display.textContent.length >= MAX_DIGITS && value !== ".") {
+    return; // Stop appending if the length of the display exceeds MAX_DIGITS
+  }
+
   if (!isOperatorChosen) {
     if (value === "." && !firstNumber.includes(".")) {
       firstNumber += value;
       display.textContent = firstNumber;
-    } else if (/\d/.test(value) && firstNumber.length < MAX_DIGITS) {
+    } else if (/\d/.test(value)) {
       firstNumber += value;
       display.textContent = firstNumber;
     }
@@ -29,7 +34,7 @@ function appendNumber(value) {
     if (value === "." && !secondNumber.includes(".")) {
       secondNumber += value;
       display.textContent = secondNumber;
-    } else if (/\d/.test(value) && secondNumber.length < MAX_DIGITS) {
+    } else if (/\d/.test(value)) {
       secondNumber += value;
       display.textContent = secondNumber;
     }

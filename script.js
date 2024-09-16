@@ -9,7 +9,7 @@ let firstNumber = "";
 let secondNumber = "";
 let operator = "";
 let isOperatorChosen = false;
-const MAX_DIGITS = 12;
+const MAX_DIGITS = 9;
 
 // Function to find an operator button by its text content
 function getOperatorButton(op) {

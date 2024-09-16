@@ -11,4 +11,4 @@ A minimalist calculator with basic arithmetic and percentage functions.
 - Responsive UI with clear and backspace functionalities.
 
 ## Demo
-You can view a live demo of the app [https://haseebmalik18.github.io/calculator-project/](#) 
+You can view a live demo of the app https://haseebmalik18.github.io/calculator-project/
